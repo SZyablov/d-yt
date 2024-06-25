@@ -1,0 +1,127 @@
+* {
+    font-family: "Montserrat", Helvetica, Arial, sans-serif;
+    color: #fafafa;
+}
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #202020;
+}
+body div{
+    border-radius: 10px;
+}
+#player{
+    border-radius: 10px;
+    float: left;
+}
+h1{
+    margin-top: 0;
+}
+
+.relative{
+    position: relative;
+}
+i.status-icon{
+    font-size: 14px;
+}
+
+button, input[type="submit"], input[type="text"]{
+    color: #000;
+}
+button, input[type="submit"]{
+    background-color: #e62c1c;
+    color: #fff;
+    border: 0;
+
+    border-radius: 5px;
+    height: 25px;
+    margin: 0;
+    padding: 0;
+    
+    cursor: pointer;
+}
+
+table{
+    table-layout: fixed;
+}
+.settings-panel {
+    position: relative;
+    background-color: #313131;
+    height: calc(100% - 50px);
+    min-height: 280px;
+    width: calc(100% - 60px);
+    margin: 10px;
+    padding: 20px;
+    /* border: 1px solid black; */
+}
+.settings-panel .name{
+    width: 300px;
+    text-align: right;
+    padding-right: 10px;
+    padding-top: 3px;
+    vertical-align: text-top;
+}
+.settings-panel .description{
+    color: #979797;
+    font-size: 12px;
+    font-weight: normal;
+    text-align: left;
+}
+.settings-panel table{
+    max-width: 1200px;
+    min-width: 0px;
+    width: 100%;
+}
+.settings-panel input[type="text"]{
+    width: 100%;
+    background-color: #202020;
+    color: #fff;
+    border: 1px solid #c7c7c7;
+    padding: 3px;
+}
+.settings-panel input[type="checkbox"]{
+    accent-color: #202020;
+}
+.settings-panel #subtitle-langs{
+    max-width: 150px;
+    width: 100%;
+}
+.settings-panel .value input[type="checkbox"]{
+    width: auto;
+    margin-top: 6px;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
+.settings-panel .save-button{
+    position: absolute;
+    vertical-align: middle;
+    bottom: 0;
+    right: 0;
+}
+.settings-panel .save-button > *{
+    display: inline-block;
+}
+.settings-panel .save-button input{
+    margin: 10px;
+    padding: 10px 15px;
+    font-size: 18px;
+    height: 40px;
+}
+.settings-panel .save-button div{
+    vertical-align: middle;
+    height: 36px;
+}
+.settings-panel .save-button i{
+    font-size: 30px;
+}
+
+.visible {
+    visibility: visible;
+    opacity: 1;
+}
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s .5s, opacity .5s linear;
+}

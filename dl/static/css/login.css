@@ -1,0 +1,33 @@
+.login-panel {
+    position: relative;
+    background-color: #313131;
+    height: auto;
+    margin: 10px;
+    padding: 20px;
+    padding-left: calc(30% - 100px);
+    /* border: 1px solid black; */
+}
+.login-panel h1{
+    margin-top: 0;
+}
+.login-panel input[type="submit"] {
+    padding: 5px 10px;
+}
+.login-panel input[type="password"] {
+    color: #000;
+}
+.login-panel .tip {
+    margin: 0px;
+}
+.login-panel .smaller-tip {
+    opacity: 50%;
+    font-size: 12px;
+}
+
+.alert-error{
+    margin-bottom: 15px;
+    color: red;
+}
+.alert-info{
+    margin-bottom: 15px;
+}

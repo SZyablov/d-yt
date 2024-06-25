@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    {% block css_sheet %}{% endblock %}
+    {% block js_script %}{% endblock %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- ICONS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    
+    <!-- <script src="{% static 'js/yt-kitchen.js' %}"></script> -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/watch.css' %}"> -->
+</head>
+<body>
+<div id="app">
+    <div class="header">
+        <div class="logo">
+            <a href="/watch"><span class="logo-yt">yt-</span><span class="logo-kitchen">kitchen</span></a>
+        </div>
+        <div class="menu">
+            <a href="/faq">
+                <div class="faq">
+                    <span class="material-symbols-outlined">
+                        help
+                    </span>
+                </div>
+            </a>
+            {%if request.user.is_authenticated %}
+                <span class="logout-text">Hi, {{ request.user.username | title }}</span>
+                <a href="/ytdlp-presets">
+                    <div class="settings ">
+                        <span class="material-symbols-outlined">
+                            list_alt
+                        </span>
+                    </div>
+                </a>
+                <a href="/settings">
+                    <div class="settings ">
+                        <span class="material-symbols-outlined">
+                            settings
+                        </span>
+                    </div>
+                </a>
+  		    	<a href="/logout">
+                    <div class="logout ">
+                        <span class="material-symbols-outlined">
+                            logout
+                        </span>
+                    </div>
+                </a>
+  		    {%else%}
+            <a href="/login">
+                <div class="login ">
+                    <span class="material-symbols-outlined">
+                        login
+                    </span>
+                </div>
+            </a>
+  		    {%endif%}
+        </div>
+    </div>
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>

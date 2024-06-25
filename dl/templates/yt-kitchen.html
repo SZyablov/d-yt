@@ -1,0 +1,186 @@
+
+{% extends "base.html" %}
+{% block title %}yt-kitchen{% endblock %}
+{% load static %}
+{% block css_sheet %}<link rel="stylesheet" type="text/css" href="{% static 'css/watch.css' %}">{% endblock %}
+{% block js_script %}<script src="{% static 'js/yt-kitchen.js' %}"></script>{% endblock %}
+{% block content %}
+<template id="plate-template">
+    <div class="plate" id="id" data-video-id="id">
+        <div class="plate-info">
+            <div class="plate-thumbnail"><img src="null"/></div>
+            <div class="plate-serving">
+                <div class="plate-title"></div>
+                <div class="plate-options">none</div>
+                <div class="plate-error"></div>
+            </div>
+            <div class="plate-controls">
+                <div class="start-stop control-button" data-id="id">
+                    <span class="material-symbols-outlined">
+                        play_pause
+                    </span>
+                </div>
+                <div class="delete control-button" data-id="id">
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                </div>
+            </div>
+        </div>
+        <progress max="100" value="0">70%</progress>
+        <div class="plate-stats relative">
+            <div class="plate-speed">-</div>
+            <div class="plate-percents">-</div>
+            <div class="plate-downloaded">-</div>
+        </div>
+    </div>
+</template>
+
+{% for preset in presets %}
+    <div class="hidden preset-values" data-name="{{preset.name}}" data-preset="{{preset.config}}"></div>
+{% endfor %}
+
+{% csrf_token %}
+<div class="search">
+    <input id="video-id-search" type="text" id="video-id" name="name" size="20" value="" autocomplete="off"/>
+    <input type="submit" value="Search" />
+</div>
+<div class="kitchen">
+    <div id="player"></div>
+    
+    <div class="info">
+        <div id="kitchen-title" class="title"><i>Title will be here</i></div>
+        <div class="download-options">
+            <div class="download-buttons">
+                <div class="download-best">
+                <!-- <div class="option-title">Best video+audio quality available</div> -->
+                <button data-id="">Download best video&audio</button>
+                </div>
+                <div class="download-combined">
+                <form method="POST" class="download-form" onsubmit="return false">
+                    <table>
+                        <tr class="labels">
+                            <th>Video</th>
+                            <th></th>
+                            <th>Audio</th>
+                            <th>Format</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <select class="video-formats video-combined">
+                                    <!-- <option>Пункт 1</option>
+                                    <option>Пункт 2</option> -->
+                                </select>
+                            </th>
+                            <th>+</th>
+                            <th>
+                                <select class="audio-formats audio-combined">
+                                    <!-- <option>Пункт 1</option>
+                                    <option>Пункт 2</option> -->
+                                </select>
+                            </th>
+                            <th>
+                                <select class="extension">
+                                    <option>.mp4</option>
+                                    <option>.avi</option>
+                                    <option>.flv</option>
+                                    <option>.mkv</option>
+                                    <option>.mov</option>
+                                    <option>.webm</option>
+                                </select>
+                            </th>
+                        </tr>
+                    </table>
+                    <button data-id="">Download</button>
+                </form>
+                </div>
+                <div class="download-only-something">
+                <form method="POST" class="download-video" onsubmit="return false">
+                    <table>
+                        <tr class="labels">
+                            <th>Only video</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <select class="video-formats only-video-formats">
+                                    <!-- <option>Пункт 1</option>
+                                    <option>Пункт 2</option> -->
+                                </select>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <button data-id="">Download video</button>
+                            </th>
+                        </tr>
+                    </table>
+                </form>
+                <form method="POST" class="download-audio" onsubmit="return false">
+                    <table>
+                        <tr class="labels">
+                            <th>Only audio</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <select class="audio-formats only-audio-formats">
+                                    <!-- <option>Пункт 1</option>
+                                    <option>Пункт 2</option> -->
+                                </select>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <button data-id="">Download audio</button>
+                            </th>
+                        </tr>
+                    </table>
+                </form>
+                </div>
+            </div>
+            <div class="download-preset">
+                <p>Presets (<a href="/ytdlp-presets" target="_blank">edit <span class="material-symbols-outlined">open_in_new</span></a>)</p>
+                <select class="preset">
+                    {% for preset in presets %}
+                        <option>{{preset.name}}</option>
+                    {% endfor %}
+                </select>
+                <input id="choosen-preset" type="text" value="" autocomplete="off"/>
+                <button data-id="">Download</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="plates">
+    {% for plate in plates %}
+        <div class="plate" id="{{plate.internal_id}}" data-id="{{plate.video_id}}">
+            <div class="plate-info">
+                <div class="plate-thumbnail"><img src="{{plate.thumbnail}}"></a></div>
+                <div class="plate-serving">
+                    <div class="plate-title"><a href="https://youtu.be/{{plate.video_id}}">{{plate.title}}</a></div>
+                    <div class="plate-options">{{plate.options}}</div>
+                    <div class="plate-error">{{plate.error}}</div>
+                </div>
+                <div class="plate-controls">
+                    <div class="start-stop control-button" data-id="{{plate.internal_id}}">
+                        <span class="material-symbols-outlined">
+                            play_pause
+                        </span>
+                    </div>
+                    <div class="delete control-button" data-id="{{plate.internal_id}}">
+                        <span class="material-symbols-outlined">
+                            delete
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <progress max="100" value="0">70%</progress>
+            <div class="plate-stats relative">
+                <div class="plate-speed">-</div>
+                <div class="plate-percents">-</div>
+                <div class="plate-downloaded">-</div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

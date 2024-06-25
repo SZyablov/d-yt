@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}yt-kitchen{% endblock %}
+{% load static %}
+{% block css_sheet %}<link rel="stylesheet" type="text/css" href="{% static 'css/settings.css' %}">{% endblock %}
+{% block js_script %}<script src="{% static 'js/yt-kitchen-settings.js' %}"></script>{% endblock %}
+{% block content %}
+<div class="settings-panel">
+    {% csrf_token %}
+    
+    <h1>Settings</h1>
+    <form>
+        <table>
+            {% for p in preferences %}
+                <tr class="">
+                    <td class="name"><label for="destination-folder">Destination folder</label></td>
+                    <td class="value">
+                        <input id="destination-folder" type="text" value="{{p.destination_folder}}" autocomplete="off"/>
+                        <div class="description">You can use "C:\Users\%username%\" (Windows) or "/home/%username%/" (Linux) to specify the destination folder for the user from which yt-kitchen is running.</div>
+                    </td>
+                </tr>
+                <tr class="">
+                    <td class="name"><label for="embed-thumbnail">Embed thumbnail</label></td>
+                    <td class="value">
+                        <input id="embed-thumbnail" type="checkbox" {{p.embed_thumbnail|yesno:"checked=\"\","}} />
+                        <div class="description">Embed thumbnail in the video as cover art</div>
+                    </td>
+                </tr>
+                <tr class="">
+                    <td class="name"><label for="embed-subtitles">Embed subtitles</label></td>
+                    <td class="value">
+                        <input id="embed-subtitles" type="checkbox" {{p.embed_subtitles|yesno:"checked=\"\","}} />
+                        <div class="description">Embed subtitles in the video (only for mp4, webm and mkv videos)</div>
+                    </td>
+                </tr>
+                <tr class="">
+                    <td class="name"><label for="subtitle-langs">Subtitle languages</label></td>
+                    <td class="value">
+                        <input id="subtitle-langs" type="text" value="{{p.subtitle_langs}}" />
+                        <div class="description">Languages of the subtitles to download (can be regex) or "all" separated by commas, e.g. "en.*,ja". You can prefix the language code with a "-" to exclude it from the requested languages, e.g. "all,-live_chat"</div>
+                    </td>
+                </tr>
+                <tr class="">
+                    <td class="name"><label for="embed-chapters">Embed chapters</label></td>
+                    <td class="value">
+                        <input id="embed-chapters" type="checkbox" {{p.embed_chapters|yesno:"checked=\"\","}} />
+                        <div class="description">Add chapter markers to the video file</div>
+                    </td>
+                </tr>
+                <tr class="">
+                    <td class="name"><label for="embed-json-info">Embed JSON info</label></td>
+                    <td class="value">
+                        <input id="embed-json-info"  type="checkbox" {{p.embed_json_info|yesno:"checked=\"\","}} />
+                        <div class="description">Embed the infojson as an attachment to mkv/mka video files</div>
+                    </td>
+                </tr>
+                <tr class="">
+                    <td class="name"><label for="embed-metadata">Embed metadata</label></td>
+                    <td class="value">
+                        <input id="embed-metadata" type="checkbox" {{p.embed_metadata|yesno:"checked=\"\","}} />
+                        <div class="description">Embed metadata to the video file. Also embeds chapters/infojson if present unless no "Embed chapters" or no "Embed JSON info" are used</div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </form>   
+    <div class="save-button">
+        <div id="check" class="hidden"><i class="material-symbols-outlined status-icon">done_outline</i></div>
+        <input type="submit" value="Save" onsubmit="return false;"/>   
+    </div>      
+</div>
+{% endblock %}

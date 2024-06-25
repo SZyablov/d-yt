@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}yt-kitchen{% endblock %}
+{% load static %}
+{% block css_sheet %}<link rel="stylesheet" type="text/css" href="{% static 'css/presets.css' %}">{% endblock %}
+{% block js_script %}<script src="{% static 'js/yt-kitchen-presets.js' %}"></script>{% endblock %}
+{% block content %}
+<div class="configs-panel">
+    <template id="row">
+        <tr class="">
+            <td class="name" data-name=""></td>
+            <td class="value"></td>
+            <td class="button">
+                <div class="edit control-button" data-id="id">
+                    <span class="material-symbols-outlined">
+                        edit
+                    </span>
+                </div>
+            </td>
+            <td class="button">
+                <div class="delete control-button" data-id="id">
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                </div>
+            </td>
+        </tr>
+    </template>
+
+    {% csrf_token %}
+    
+    <h1>New preset</h1>
+    <div class="config-add-panel">
+        <p>Preset (enter an existing name to edit it)</p>
+        <input id="config-name" type="text" name="name" size="20" value="" autocomplete="off"/>
+        <p>ytdlp-config (<a href="https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#format-selection" target="_blank">yt-dlp formatting docs <span class="material-symbols-outlined">open_in_new</span></a>)</p>
+        <textarea name="name" id="config" cols="30" rows="5"></textarea>
+        <input class="save-button" type="submit" value="Save"/>
+    </div>
+    <br><br><br>
+    <h1>Presets</h1>
+    <table class="table-header">
+        <tr class="">
+            <td class="name"><b>Preset</b></td>
+            <td class="value"><b>Config</b></td>
+            <td class="button"></td>
+            <td class="button"></td>
+        </tr>
+    </table>
+    <table class="data">
+        {% for config in configs %}
+            <tr class="">
+                <td class="name" data-name="{{config.name}}">{{config.name}}</td>
+                <td class="value">{{config.config}}</td>
+                <td class="button">
+                    <div class="edit control-button" data-id="id">
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                    </div>
+                </td>
+                <td class="button">
+                    <div class="delete control-button" data-id="id">
+                        <span class="material-symbols-outlined">
+                            delete
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

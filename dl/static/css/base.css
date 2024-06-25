@@ -1,0 +1,59 @@
+.logo a{
+    text-decoration: none;
+}
+
+.menu a{
+    text-decoration: none;
+}
+
+.header{
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.header > *{
+    display: inline-block;
+}
+.logo{
+    padding: 0px 20px;
+}
+.header .logo *{
+    font-size: 30px;
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+}
+.header .logo-kitchen{
+    color: #e62c1c;
+}
+.header .menu{
+    float: right;
+    margin-top: 5px;
+    margin-right: 15px;
+}
+.header .menu div{
+    display: inline-block;
+    align-items: center;
+    vertical-align: middle;
+
+    width: 30px;
+    height: 30px;
+
+    font-size: 28px;
+    text-align: center;
+
+    /* border: 1px solid #757575; */
+    /* border-radius: 10px; */
+
+    /* background-color: #535353; */
+    cursor: pointer;
+}
+.header .menu div:hover{
+    display: inline-block;
+
+    background-color: #757575;
+}
+
+.login, .logout-text{
+    margin-left: 20px;
+}
